@@ -2,6 +2,7 @@ package com.patrick.mongodbspring.config;
 
 import com.patrick.mongodbspring.domain.Post;
 import com.patrick.mongodbspring.domain.User;
+import com.patrick.mongodbspring.dto.AuthorDTO;
 import com.patrick.mongodbspring.repository.PostRepository;
 import com.patrick.mongodbspring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +35,8 @@ public class instantiation implements CommandLineRunner {
         User bob = new User(null, "Bob Grey", "bob@gmail.com");
         userRepository.saveAll(Arrays.asList(maria, alex, bob));
 
-        Post post1 = new Post(null, sdf.parse("16/07/2022"), "Minha nova vida", "Vou viajar para São Paulo. Abraços!", maria);
-        Post post2 = new Post(null, sdf.parse("17/07/2022"), "Mudança pronta", "Acordei feliz hoje!", maria);
+        Post post1 = new Post(null, sdf.parse("16/07/2022"), "Minha nova vida", "Vou viajar para São Paulo. Abraços!", new AuthorDTO(maria));
+        Post post2 = new Post(null, sdf.parse("17/07/2022"), "Mudança pronta", "Acordei feliz hoje!", new AuthorDTO(maria));
 
         postRepository.saveAll(Arrays.asList(post1, post2));
     }
