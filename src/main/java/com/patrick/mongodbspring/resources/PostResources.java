@@ -3,6 +3,7 @@ package com.patrick.mongodbspring.resources;
 import com.patrick.mongodbspring.domain.Post;
 import com.patrick.mongodbspring.domain.User;
 import com.patrick.mongodbspring.dto.UserDTO;
+import com.patrick.mongodbspring.resources.util.URL;
 import com.patrick.mongodbspring.services.PostService;
 import com.patrick.mongodbspring.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,12 @@ public class PostResources {
     public ResponseEntity<Post> findById(@PathVariable String id){
         Post obj = service.findById(id);
         return ResponseEntity.ok().body(obj);
+    }
+
+    @GetMapping(value = "/titlesearch")
+    public ResponseEntity<List<Post>> findByTitle(@RequestParam(value = "text", defaultValue = "") String text){
+        text = URL.decodeParam(text);
+        List<Post> list = service.findByTitle(text);
+        return ResponseEntity.ok().body(list);
     }
 }
